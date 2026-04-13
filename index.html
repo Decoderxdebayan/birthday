@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Happy Birthday My Penguin 🐧❤️</title>
+
+<style>
+body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+    text-align: center;
+    background: linear-gradient(135deg, #ff758c, #ff7eb3);
+    color: white;
+    overflow: hidden;
+}
+
+#lockScreen {
+    position: fixed;
+    width: 100%;
+    height: 100%;
+    background: black;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+input {
+    padding: 10px;
+    border-radius: 10px;
+    border: none;
+    margin-top: 10px;
+}
+
+button {
+    padding: 10px 20px;
+    border-radius: 20px;
+    border: none;
+    background: #ff4d6d;
+    color: white;
+    margin-top: 10px;
+    cursor: pointer;
+}
+
+#mainContent {
+    display: none;
+    padding-top: 50px;
+}
+
+h1 {
+    font-size: 2.5em;
+}
+
+#typing {
+    font-size: 1.2em;
+    margin: 20px;
+    min-height: 120px;
+}
+
+img {
+    width: 220px;
+    border-radius: 20px;
+    margin-top: 20px;
+}
+
+/* Fireworks */
+canvas {
+    position: fixed;
+    top: 0;
+    left: 0;
+}
+</style>
+</head>
+
+<body>
+
+<!-- 🔒 LOCK SCREEN -->
+<div id="lockScreen">
+    <h2>Enter Secret Code 🐧</h2>
+    <input type="password" id="password" placeholder="Enter password">
+    <button onclick="checkPassword()">Unlock ❤️</button>
+</div>
+
+<!-- 🎂 MAIN CONTENT -->
+<div id="mainContent">
+    <h1>Happy Birthday My Penguin 🐧❤️</h1>
+    <div id="typing"></div>
+
+    <img src="https://i.imgur.com/yourimage.jpg" alt="Her Photo">
+
+    <audio autoplay loop>
+        <source src="https://www.bensound.com/bensound-music/bensound-romantic.mp3">
+    </audio>
+</div>
+
+<canvas id="fireworks"></canvas>
+
+<script>
+// 🔒 Password
+function checkPassword() {
+    const pass = document.getElementById("password").value;
+    if(pass === "penguin") {
+        document.getElementById("lockScreen").style.display = "none";
+        document.getElementById("mainContent").style.display = "block";
+        startTyping();
+        startFireworks();
+    } else {
+        alert("Wrong password 😤");
+    }
+}
+
+// ✍️ Typing Effect
+const text = `Paglu… take extra care of yourself 😤❤️
+
+Eat ice cream 🍦 but don’t catch cold!
+
+Kinder Joy 🍫 and momo 🥟 still pending 😌
+
+You are my favorite penguin forever 🐧💖
+
+Now you owe me one Kinder Joy 😏🍫`;
+
+let i = 0;
+function startTyping() {
+    function type() {
+        if(i < text.length) {
+            document.getElementById("typing").innerHTML += text.charAt(i);
+            i++;
+            setTimeout(type, 40);
+        }
+    }
+    type();
+}
+
+// 🎆 Fireworks
+function startFireworks() {
+    const canvas = document.getElementById("fireworks");
+    const ctx = canvas.getContext("2d");
+
+    canvas.width = window.innerWidth;
+    canvas.height = window.innerHeight;
+
+    let particles = [];
+
+    function createFirework() {
+        for(let i=0;i<100;i++){
+            particles.push({
+                x: canvas.width/2,
+                y: canvas.height/2,
+                dx: (Math.random()-0.5)*6,
+                dy: (Math.random()-0.5)*6,
+                life: 100
+            });
+        }
+    }
+
+    function animate() {
+        ctx.fillStyle = "rgba(0,0,0,0.2)";
+        ctx.fillRect(0,0,canvas.width,canvas.height);
+
+        particles.forEach((p,index)=>{
+            p.x += p.dx;
+            p.y += p.dy;
+            p.life--;
+
+            ctx.fillStyle = "white";
+            ctx.fillRect(p.x,p.y,2,2);
+
+            if(p.life<=0) particles.splice(index,1);
+        });
+
+        requestAnimationFrame(animate);
+    }
+
+    createFirework();
+    animate();
+}
+</script>
+
+</body>
+</html>
