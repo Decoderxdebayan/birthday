@@ -10,7 +10,7 @@
 /* BODY */
 body {
   margin: 0;
-  font-family: Arial, sans-serif;
+  font-family: 'Segoe UI', sans-serif;
   color: white;
   text-align: center;
   overflow-y: auto;
@@ -25,7 +25,7 @@ body::before {
   position: fixed;
   width: 100%;
   height: 100%;
-  background: rgba(0,0,0,0.5);
+  background: rgba(0,0,0,0.6);
   z-index: -1;
 }
 
@@ -39,17 +39,19 @@ body::before {
 }
 
 input {
-  padding: 10px;
-  border-radius: 10px;
+  padding: 12px;
+  border-radius: 20px;
   border: none;
 }
 
 button {
-  padding: 10px 20px;
+  padding: 12px 20px;
   margin-top: 10px;
   border: none;
-  border-radius: 10px;
-  background: pink;
+  border-radius: 20px;
+  background: linear-gradient(45deg, pink, hotpink);
+  color: black;
+  font-weight: bold;
 }
 
 /* MAIN */
@@ -58,13 +60,54 @@ button {
   padding: 20px;
 }
 
-/* TEXT */
+/* POPUP BUTTON */
+.openBtn {
+  margin-top: 20px;
+}
+
+/* POPUP */
+.popup {
+  display: none;
+  position: fixed;
+  top:0;
+  left:0;
+  width:100%;
+  height:100%;
+  background: rgba(0,0,0,0.8);
+  justify-content:center;
+  align-items:center;
+  z-index:1000;
+}
+
+.popupContent {
+  background: linear-gradient(135deg, #1a1a1a, #2b2b2b);
+  padding: 25px;
+  border-radius: 20px;
+  max-width: 90%;
+  max-height: 80%;
+  overflow-y: auto;
+  animation: fadeIn 0.5s ease;
+  box-shadow: 0 0 20px rgba(255,105,180,0.5);
+}
+
+.closeBtn {
+  position:absolute;
+  top:15px;
+  right:25px;
+  cursor:pointer;
+  font-size:22px;
+}
+
+/* MESSAGE STYLE */
 .message {
-  max-width: 800px;
-  margin: auto;
-  line-height: 1.7;
+  line-height: 1.8;
   font-size: 18px;
   white-space: pre-line;
+  text-align: left;
+  background: linear-gradient(45deg, #ff9a9e, #fad0c4);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  font-weight: 500;
 }
 
 /* SLIDESHOW */
@@ -74,6 +117,7 @@ button {
   object-fit: cover;
   border-radius: 20px;
   margin-top: 20px;
+  transition: opacity 0.8s ease;
 }
 
 /* GALLERY */
@@ -111,6 +155,11 @@ button {
   100% {transform: translateY(-800px); opacity:0;}
 }
 
+@keyframes fadeIn {
+  from {opacity:0; transform: scale(0.9);}
+  to {opacity:1; transform: scale(1);}
+}
+
 </style>
 </head>
 
@@ -123,10 +172,17 @@ button {
   <button onclick="checkPassword()">Enter</button>
 </div>
 
-<!-- MAIN CONTENT -->
+<!-- MAIN -->
 <div id="mainContent">
 
 <h1>Happy Birthday Humari Pyari Penguinnn 🐧❤️</h1>
+
+<button class="openBtn" onclick="openMessage()">Open Your Letter 🐧💌</button>
+
+<!-- POPUP -->
+<div id="messageBox" class="popup">
+  <div class="popupContent">
+    <span class="closeBtn" onclick="closeMessage()">✖</span>
 
 <div class="message">
 O mere pagluuu si Penguinnn 🐧❤️✨
@@ -174,12 +230,12 @@ tu woh part hai jiske bina sab kuch adhura lagta hai 😌
 Bas tu aise hi rehna… meri paglu, meri penguin banke🐧❤️😮‍💨  
 
 Happy Birthday, cutieee Aruuu 🎂💖  
-Stay happy, stay mine like this always 💫  
 
 You’re not just important…  
 you’re something I never want to lose 😌🥹💖
+</div>
 
-(Scroll up once again… this is all yours 🐧❤️)
+  </div>
 </div>
 
 <!-- SLIDESHOW -->
@@ -199,7 +255,7 @@ you’re something I never want to lose 😌🥹💖
 </div>
 
 <!-- MUSIC -->
-<audio autoplay loop>
+<audio id="bgMusic" loop>
   <source src="birthday.mp3" type="audio/mpeg">
 </audio>
 
@@ -211,54 +267,62 @@ function checkPassword(){
   if(pass === "penguin"){
     document.getElementById("lockScreen").style.display="none";
     document.getElementById("mainContent").style.display="block";
+    document.getElementById("bgMusic").play();
+    setTimeout(()=>alert("Happy Birthday Penguinnn 🐧❤️🎂"),500);
   } else {
     alert("Wrong password....huhhh pagluu kahiki😤");
   }
 }
 
-/* BACKGROUND FIX (NO WHITE ISSUE) */
-let bgImages = ["usbg1.jpg","usbg2.jpg"];
-let bgIndex = 0;
-
-function changeBG(){
-  document.body.style.backgroundImage = "url('" + bgImages[bgIndex] + "')";
-  bgIndex = (bgIndex + 1) % bgImages.length;
+/* POPUP */
+function openMessage(){
+  document.getElementById("messageBox").style.display="flex";
+}
+function closeMessage(){
+  document.getElementById("messageBox").style.display="none";
 }
 
+/* BACKGROUND */
+let bgImages=["usbg1.jpg","usbg2.jpg"];
+let bgIndex=0;
+function changeBG(){
+  document.body.style.backgroundImage="url('"+bgImages[bgIndex]+"')";
+  bgIndex=(bgIndex+1)%bgImages.length;
+}
 changeBG();
-setInterval(changeBG, 5000);
+setInterval(changeBG,5000);
 
 /* SLIDESHOW */
-let slideImages = [];
-for(let i=1;i<=71;i++){
-  slideImages.push("her"+i+".jpg");
-}
-
-let sIndex = 0;
+let slideImages=[];
+for(let i=1;i<=71;i++){slideImages.push("her"+i+".jpg");}
+let sIndex=0;
 setInterval(()=>{
-  document.getElementById("slide").src = slideImages[sIndex];
-  sIndex = (sIndex+1)%slideImages.length;
+  let img=document.getElementById("slide");
+  img.style.opacity=0;
+  setTimeout(()=>{
+    img.src=slideImages[sIndex];
+    img.style.opacity=1;
+    sIndex=(sIndex+1)%slideImages.length;
+  },400);
 },2000);
 
-/* FUNNY */
+/* SAFE IMAGE */
+function createSafeImage(src){
+  let img=document.createElement("img");
+  img.src=src;
+  img.onerror=function(){this.style.display="none";};
+  return img;
+}
+
+/* GALLERIES */
 for(let i=1;i<=10;i++){
-  let img = document.createElement("img");
-  img.src = "herfun"+i+".jpg";
-  document.getElementById("funGallery").appendChild(img);
+  funGallery.appendChild(createSafeImage("herfun"+i+".jpg"));
 }
-
-/* COUPLE */
 for(let i=1;i<=12;i++){
-  let img = document.createElement("img");
-  img.src = "us"+i+".jpg";
-  document.getElementById("usGallery").appendChild(img);
+  usGallery.appendChild(createSafeImage("us"+i+".jpg"));
 }
-
-/* HER */
 for(let i=1;i<=71;i++){
-  let img = document.createElement("img");
-  img.src = "her"+i+".jpg";
-  document.getElementById("herGallery").appendChild(img);
+  herGallery.appendChild(createSafeImage("her"+i+".jpg"));
 }
 
 /* HEARTS */
