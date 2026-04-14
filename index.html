@@ -8,11 +8,10 @@
 <style>
 body {
     margin: 0;
-    font-family: Arial, sans-serif;
+    font-family: Arial;
     text-align: center;
-    background: linear-gradient(135deg, #ff758c, #ff7eb3);
     color: white;
-    overflow: hidden;
+    overflow-x: hidden;   /* allow vertical scroll */
 }
 
 #lockScreen {
@@ -57,12 +56,13 @@ h1 {
 
 #typing {
     font-size: 1.2em;
-    margin: 20px;
     padding: 20px;
     max-width: 800px;
-    margin-left: auto;
-    margin-right: auto;
-    line-height: 1.6;
+    margin: auto;
+    line-height: 1.8;
+    text-align: left;          /* IMPORTANT */
+    white-space: pre-line; 
+    text-shadow: 0 0 5px rgba(0,0,0,0.8);/* THIS FIXES PARAGRAPHS */
 }
 
 img {
