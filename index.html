@@ -15,13 +15,13 @@ body {
   font-family: 'Poppins', sans-serif;
   text-align: center;
 
-  background-size: cover;        /* full screen cover */
+  background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
-  background-attachment: fixed;  /* desktop smooth */
+  background-attachment: fixed;
 }
 
-/* OVERLAY */
+/* DARK OVERLAY */
 body::before {
   content: "";
   position: fixed;
@@ -52,6 +52,7 @@ input {
   background: #222;
   color: pink;
   text-align: center;
+  margin-top: 15px;
 }
 
 button {
@@ -60,6 +61,7 @@ button {
   border: none;
   background: linear-gradient(45deg, pink, hotpink);
   font-weight: bold;
+  margin-top: 15px;
 }
 
 /* MAIN */
@@ -72,6 +74,7 @@ button {
 h1, h2 {
   color: #ffd1dc;
   text-shadow: 0 0 10px #ff69b4;
+  margin-top: 25px;
 }
 
 /* POPUP */
@@ -82,12 +85,13 @@ h1, h2 {
   left:0;
   width:100%;
   height:100%;
-  background: rgba(0,0,0,0.95); /* darker overlay */
+  background: rgba(0,0,0,0.95);
   justify-content:center;
   align-items:center;
-  z-index: 9999; /* VERY HIGH */
+  z-index: 99999;
 }
 
+/* POPUP CONTENT */
 .popupContent {
   position: relative;
   background: #111;
@@ -98,7 +102,38 @@ h1, h2 {
   overflow-y: auto;
 }
 
-/* MESSAGE (EMOJI FIX) */
+/* HEARTBEAT */
+.heartbeat {
+  animation: heartbeat 1.5s infinite;
+}
+
+@keyframes heartbeat {
+  0% { transform: scale(1); }
+  25% { transform: scale(1.02); }
+  50% { transform: scale(1); }
+  75% { transform: scale(1.02); }
+  100% { transform: scale(1); }
+}
+
+/* CLOSE BUTTON FIX */
+.closeBtn {
+  position: absolute;
+  top: 12px;
+  right: 18px;
+  font-size: 22px;
+  color: #ff4d6d;
+  cursor: pointer;
+  font-weight: bold;
+  text-shadow: 0 0 10px #ff4d6d;
+  transition: 0.2s ease;
+}
+
+.closeBtn:hover {
+  transform: scale(1.2);
+  color: white;
+}
+
+/* MESSAGE */
 .message {
   color: #ffd1dc;
   line-height: 1.8;
@@ -113,6 +148,7 @@ h1, h2 {
   object-fit: cover;
   border-radius: 20px;
   transition: opacity 1s;
+  margin-top: 30px;
 }
 
 /* GALLERY */
@@ -137,21 +173,22 @@ h1, h2 {
   color: pink;
   animation: float 5s linear infinite;
 }
- @media (max-width: 768px) {
+
+@keyframes float {
+  100% {transform: translateY(-800px); opacity:0;}
+}
+
+/* MOBILE */
+@media (max-width: 768px) {
   body {
-    background-attachment: scroll; /* mobile fix */
+    background-attachment: scroll;
     background-size: cover;
   }
-}
 
   .slideshow img {
     width: 90%;
     height: auto;
   }
-}
-
-@keyframes float {
-  100% {transform: translateY(-800px); opacity:0;}
 }
 
 </style>
@@ -168,6 +205,7 @@ h1, h2 {
 
 <!-- MAIN -->
 <div id="mainContent">
+  <div id="pageContent">
 
 <h1>Happy Birthday Humari Pyari Penguinnn 🐧❤️</h1>
 
@@ -175,10 +213,14 @@ h1, h2 {
 
 <!-- POPUP -->
 <div id="messageBox" class="popup">
-  <div class="popupContent">
-    <span onclick="closeMessage()" style="position:absolute;right:20px;cursor:pointer;">✖</span>
+  <div class="popupContent" id="popupBox">
 
-<div class="message">
+<span class="closeBtn" onclick="closeMessage()">✖</span>
+
+<div class="message" id="typedMessage"></div>
+
+<!-- ORIGINAL MESSAGE (UNCHANGED) -->
+<div id="originalMessage" style="display:none;">
 O mere pagluuu si Penguinnn 🐧❤️✨
 
 Pata hain... kabhi kabhi life mein kuch log aise aate hain... bina kisi warning ke, aur dheere dheere woh tumhari everyday life ka sabse important part ban jaate hain 💫  
@@ -235,6 +277,9 @@ you’re something I never want to lose 😌🥹💖
   </div>
 </div>
 
+  </div>
+</div>
+
 <!-- SLIDESHOW -->
 <div class="slideshow">
   <img id="slide" src="her1.jpg">
@@ -266,24 +311,53 @@ function checkPassword(){
     document.getElementById("bgMusic").play();
     setTimeout(()=>alert("Yayyy aaj to Penguinnn ka Birthday hainn!!🐧❤️🎂"),500);
   } else {
-    alert("Wrong password....huhhh pagluu kahiki😤");
+    alert("Wrong password....huhhh pagluu kahiki 😤");
   }
 }
 
-/* POPUP */
-function openMessage(){ messageBox.style.display="flex"; }
-function closeMessage(){ messageBox.style.display="none"; }
+/* POPUP + BLUR + HEARTBEAT + TYPING */
+function openMessage(){
+  messageBox.style.display = "flex";
+  pageContent.classList.add("blur");
+  popupBox.classList.add("heartbeat");
+  typeWriter();
+}
 
-/* BG */
+function closeMessage(){
+  messageBox.style.display = "none";
+  pageContent.classList.remove("blur");
+}
+
+/* TYPING EFFECT */
+function typeWriter(){
+  let text = document.getElementById("originalMessage").innerText;
+  let target = document.getElementById("typedMessage");
+  target.innerHTML = "";
+
+  let i = 0;
+
+  function typing(){
+    if(i < text.length){
+      target.innerHTML += text.charAt(i);
+      i++;
+      setTimeout(typing, 15);
+    }
+  }
+
+  typing();
+}
+
+/* BACKGROUND */
 let bg=["usbg1.jpg","usbg2.jpg"],i=0;
 setInterval(()=>{
   document.body.style.backgroundImage="url('"+bg[i]+"')";
   i=(i+1)%2;
 },5000);
 
-/* SLOW SLIDESHOW */
+/* SLIDESHOW */
 let arr=[];
 for(let i=1;i<=71;i++) arr.push("her"+i+".jpg");
+
 let s=0;
 setInterval(()=>{
   slide.style.opacity=0;
@@ -295,12 +369,18 @@ setInterval(()=>{
 },3500);
 
 /* GALLERY */
-function img(x){let i=new Image();i.src=x;i.onerror=()=>i.remove();return i;}
+function img(x){
+  let i=new Image();
+  i.src=x;
+  i.onerror=()=>i.remove();
+  return i;
+}
+
 for(let i=1;i<=10;i++) funGallery.appendChild(img("herfun"+i+".jpg"));
 for(let i=1;i<=12;i++) usGallery.appendChild(img("us"+i+".jpg"));
 for(let i=1;i<=71;i++) herGallery.appendChild(img("her"+i+".jpg"));
 
-/* HEART */
+/* HEARTS */
 setInterval(()=>{
   let h=document.createElement("div");
   h.className="heart";
