@@ -297,7 +297,7 @@ you’re something I never want to lose 😌🥹💖
 </div>
 
 <audio id="bgMusic" loop>
-  <source src="birthday.mp3">
+  <source src="birthday.mp3" type="audio/mpeg">
 </audio>
 
 <script>
@@ -308,7 +308,10 @@ function checkPassword(){
   if(pass === "penguin"){
     document.getElementById("lockScreen").style.display="none";
     document.getElementById("mainContent").style.display="block";
-    document.getElementById("bgMusic").play();
+   let music = document.getElementById("bgMusic");
+if(music){
+  music.play().catch(()=>{});
+}
     setTimeout(()=>alert("Yayyy aaj to Penguinnn ka Birthday hainn!!🐧❤️🎂"),500);
   } else {
     alert("Wrong password....huhhh pagluu kahiki 😤");
