@@ -5,21 +5,24 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Penguin ka Hempy wala Birthdayy 🐧❤️</title>
 
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;500;700&display=swap" rel="stylesheet">
+
 <style>
 
 /* BODY */
 body {
   margin: 0;
-  font-family: 'Segoe UI', sans-serif;
+  font-family: 'Poppins', sans-serif;
   color: white;
   text-align: center;
-  overflow-y: auto;
-  background-size: cover;
+  background-size: contain;
+  background-repeat: no-repeat;
   background-position: center;
+  background-color: black;
   transition: background-image 1s ease-in-out;
 }
 
-/* DARK OVERLAY */
+/* OVERLAY */
 body::before {
   content: "";
   position: fixed;
@@ -29,7 +32,7 @@ body::before {
   z-index: -1;
 }
 
-/* PASSWORD SCREEN */
+/* PASSWORD */
 #lockScreen {
   height: 100vh;
   display: flex;
@@ -38,19 +41,25 @@ body::before {
   flex-direction: column;
 }
 
+#lockScreen h2 {
+  color: #ffb6c1;
+  text-shadow: 0 0 10px pink;
+}
+
 input {
   padding: 12px;
   border-radius: 20px;
   border: none;
+  background: #222;
+  color: pink;
+  text-align: center;
 }
 
 button {
   padding: 12px 20px;
-  margin-top: 10px;
-  border: none;
   border-radius: 20px;
+  border: none;
   background: linear-gradient(45deg, pink, hotpink);
-  color: black;
   font-weight: bold;
 }
 
@@ -60,9 +69,10 @@ button {
   padding: 20px;
 }
 
-/* POPUP BUTTON */
-.openBtn {
-  margin-top: 20px;
+/* HEADINGS */
+h1, h2 {
+  color: #ffd1dc;
+  text-shadow: 0 0 10px #ff69b4;
 }
 
 /* POPUP */
@@ -76,38 +86,23 @@ button {
   background: rgba(0,0,0,0.8);
   justify-content:center;
   align-items:center;
-  z-index:1000;
 }
 
 .popupContent {
-  background: linear-gradient(135deg, #1a1a1a, #2b2b2b);
+  background: #111;
   padding: 25px;
   border-radius: 20px;
   max-width: 90%;
   max-height: 80%;
   overflow-y: auto;
-  animation: fadeIn 0.5s ease;
-  box-shadow: 0 0 20px rgba(255,105,180,0.5);
 }
 
-.closeBtn {
-  position:absolute;
-  top:15px;
-  right:25px;
-  cursor:pointer;
-  font-size:22px;
-}
-
-/* MESSAGE STYLE */
+/* MESSAGE (EMOJI FIX) */
 .message {
+  color: #ffd1dc;
   line-height: 1.8;
-  font-size: 18px;
   white-space: pre-line;
   text-align: left;
-  background: linear-gradient(45deg, #ff9a9e, #fad0c4);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  font-weight: 500;
 }
 
 /* SLIDESHOW */
@@ -116,8 +111,7 @@ button {
   height: 380px;
   object-fit: cover;
   border-radius: 20px;
-  margin-top: 20px;
-  transition: opacity 0.8s ease;
+  transition: opacity 1s;
 }
 
 /* GALLERY */
@@ -126,7 +120,6 @@ button {
   flex-wrap: wrap;
   justify-content: center;
   gap: 10px;
-  margin-top: 20px;
 }
 
 .gallery img {
@@ -134,11 +127,6 @@ button {
   height: 180px;
   object-fit: cover;
   border-radius: 12px;
-  transition: 0.3s;
-}
-
-.gallery img:hover {
-  transform: scale(1.1);
 }
 
 /* HEARTS */
@@ -146,18 +134,11 @@ button {
   position: fixed;
   bottom: 0;
   color: pink;
-  font-size: 20px;
   animation: float 5s linear infinite;
 }
 
 @keyframes float {
-  0% {transform: translateY(0); opacity:1;}
   100% {transform: translateY(-800px); opacity:0;}
-}
-
-@keyframes fadeIn {
-  from {opacity:0; transform: scale(0.9);}
-  to {opacity:1; transform: scale(1);}
 }
 
 </style>
@@ -167,7 +148,7 @@ button {
 
 <!-- PASSWORD -->
 <div id="lockScreen">
-  <h2>Enter Secret Code (What I call You👀🐧) 🔐</h2>
+  <h2>Enter Secret Code (What I call You👀🐧)🔐</h2>
   <input type="password" id="password">
   <button onclick="checkPassword()">Enter</button>
 </div>
@@ -177,12 +158,12 @@ button {
 
 <h1>Happy Birthday Humari Pyari Penguinnn 🐧❤️</h1>
 
-<button class="openBtn" onclick="openMessage()">Open Your Letter 🐧💌</button>
+<button onclick="openMessage()">Aapke liye ek Letter hain Medam 🐧💌</button>
 
 <!-- POPUP -->
 <div id="messageBox" class="popup">
   <div class="popupContent">
-    <span class="closeBtn" onclick="closeMessage()">✖</span>
+    <span onclick="closeMessage()" style="position:absolute;right:20px;cursor:pointer;">✖</span>
 
 <div class="message">
 O mere pagluuu si Penguinnn 🐧❤️✨
@@ -230,9 +211,12 @@ tu woh part hai jiske bina sab kuch adhura lagta hai 😌
 Bas tu aise hi rehna… meri paglu, meri penguin banke🐧❤️😮‍💨  
 
 Happy Birthday, cutieee Aruuu 🎂💖  
+Stay happy, stay mine like this always 💫  
 
 You’re not just important…  
 you’re something I never want to lose 😌🥹💖
+
+(Scroll up once again… this is all yours 🐧❤️)
 </div>
 
   </div>
@@ -243,20 +227,19 @@ you’re something I never want to lose 😌🥹💖
   <img id="slide" src="her1.jpg">
 </div>
 
-<h2>Paglu Moments👀</h2>
+<h2>Paglu Moments 👀</h2>
 <div class="gallery" id="funGallery"></div>
 
 <h2>❤️ Bandar k sath Penguinn 👀</h2>
 <div class="gallery" id="usGallery"></div>
 
-<h2>💖 Hmmmmm Humari Penguin 👀😌</h2>
+<h2>💖 Hmmmmm Humari Cutiee Piee 👀😌</h2>
 <div class="gallery" id="herGallery"></div>
 
 </div>
 
-<!-- MUSIC -->
 <audio id="bgMusic" loop>
-  <source src="birthday.mp3" type="audio/mpeg">
+  <source src="birthday.mp3">
 </audio>
 
 <script>
@@ -268,64 +251,43 @@ function checkPassword(){
     document.getElementById("lockScreen").style.display="none";
     document.getElementById("mainContent").style.display="block";
     document.getElementById("bgMusic").play();
-    setTimeout(()=>alert("Happy Birthday Penguinnn 🐧❤️🎂"),500);
+    setTimeout(()=>alert("Yayyy aaj to Penguinnn ka Birthday hainn!!🐧❤️🎂"),500);
   } else {
     alert("Wrong password....huhhh pagluu kahiki😤");
   }
 }
 
 /* POPUP */
-function openMessage(){
-  document.getElementById("messageBox").style.display="flex";
-}
-function closeMessage(){
-  document.getElementById("messageBox").style.display="none";
-}
+function openMessage(){ messageBox.style.display="flex"; }
+function closeMessage(){ messageBox.style.display="none"; }
 
-/* BACKGROUND */
-let bgImages=["usbg1.jpg","usbg2.jpg"];
-let bgIndex=0;
-function changeBG(){
-  document.body.style.backgroundImage="url('"+bgImages[bgIndex]+"')";
-  bgIndex=(bgIndex+1)%bgImages.length;
-}
-changeBG();
-setInterval(changeBG,5000);
-
-/* SLIDESHOW */
-let slideImages=[];
-for(let i=1;i<=71;i++){slideImages.push("her"+i+".jpg");}
-let sIndex=0;
+/* BG */
+let bg=["usbg1.jpg","usbg2.jpg"],i=0;
 setInterval(()=>{
-  let img=document.getElementById("slide");
-  img.style.opacity=0;
+  document.body.style.backgroundImage="url('"+bg[i]+"')";
+  i=(i+1)%2;
+},5000);
+
+/* SLOW SLIDESHOW */
+let arr=[];
+for(let i=1;i<=71;i++) arr.push("her"+i+".jpg");
+let s=0;
+setInterval(()=>{
+  slide.style.opacity=0;
   setTimeout(()=>{
-    img.src=slideImages[sIndex];
-    img.style.opacity=1;
-    sIndex=(sIndex+1)%slideImages.length;
-  },400);
-},2000);
+    slide.src=arr[s];
+    slide.style.opacity=1;
+    s=(s+1)%arr.length;
+  },500);
+},3500);
 
-/* SAFE IMAGE */
-function createSafeImage(src){
-  let img=document.createElement("img");
-  img.src=src;
-  img.onerror=function(){this.style.display="none";};
-  return img;
-}
+/* GALLERY */
+function img(x){let i=new Image();i.src=x;i.onerror=()=>i.remove();return i;}
+for(let i=1;i<=10;i++) funGallery.appendChild(img("herfun"+i+".jpg"));
+for(let i=1;i<=12;i++) usGallery.appendChild(img("us"+i+".jpg"));
+for(let i=1;i<=71;i++) herGallery.appendChild(img("her"+i+".jpg"));
 
-/* GALLERIES */
-for(let i=1;i<=10;i++){
-  funGallery.appendChild(createSafeImage("herfun"+i+".jpg"));
-}
-for(let i=1;i<=12;i++){
-  usGallery.appendChild(createSafeImage("us"+i+".jpg"));
-}
-for(let i=1;i<=71;i++){
-  herGallery.appendChild(createSafeImage("her"+i+".jpg"));
-}
-
-/* HEARTS */
+/* HEART */
 setInterval(()=>{
   let h=document.createElement("div");
   h.className="heart";
