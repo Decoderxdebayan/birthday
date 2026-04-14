@@ -3,120 +3,131 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Humari Penguin ka Birthdayyy🐧❤️</title>
+<title>Happy Birthday My Penguin 🐧❤️</title>
 
 <style>
+
+/* GENERAL */
 body {
-    margin: 0;
-    font-family: Arial;
-    color: white;
-    background: url('usbg2.jpg') no-repeat center center/cover;
+  margin: 0;
+  font-family: Arial, sans-serif;
+  color: white;
+  text-align: center;
+  overflow-y: auto;
+  background-size: cover;
+  background-position: center;
+  transition: 1s;
 }
+
+/* PASSWORD SCREEN */
 #lockScreen {
-    position: fixed;
-    width: 100%;
-    height: 100%;
-    background: url('usbg1.jpg') no-repeat center center/cover;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    z-index: 3;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  background: url('usbg1.jpg') center/cover no-repeat;
 }
 
 input {
-    padding: 10px;
-    border-radius: 10px;
-    border: none;
-    margin-top: 10px;
+  padding: 10px;
+  font-size: 18px;
+  border-radius: 10px;
+  border: none;
+  margin-top: 10px;
 }
 
 button {
-    padding: 10px 20px;
-    border-radius: 20px;
-    border: none;
-    background: #ff4d6d;
-    color: white;
-    margin-top: 10px;
-    cursor: pointer;
+  padding: 10px 20px;
+  margin-top: 10px;
+  border: none;
+  border-radius: 10px;
+  background: pink;
+  cursor: pointer;
 }
 
+/* MAIN CONTENT */
 #mainContent {
-    display: none;
-    padding-top: 50px;
-    position: relative;
-    z-index: 2;
+  display: none;
+  padding: 20px;
 }
 
+/* HEADING */
 h1 {
-    font-size: 2.5em;
+  text-shadow: 0 0 10px pink, 0 0 20px red;
 }
 
-#typing {
-    font-size: 1.2em;
-    padding: 20px;
-    max-width: 800px;
-    margin: auto;
-    line-height: 1.8;
-    text-align: left;          /* IMPORTANT */
-    white-space: pre-line; 
-    text-shadow: 0 0 5px rgba(0,0,0,0.8);/* THIS FIXES PARAGRAPHS */
+/* TEXT */
+.message {
+  max-width: 900px;
+  margin: auto;
+  line-height: 1.6;
+  font-size: 18px;
 }
 
-img {
-    width: 220px;
-    border-radius: 20px;
-    margin-top: 20px;
+/* SLIDESHOW */
+.slideshow img {
+  width: 300px;
+  height: 400px;
+  object-fit: cover;
+  border-radius: 20px;
+  box-shadow: 0 0 20px pink;
+  margin-top: 20px;
 }
 
-/* Fireworks */
-canvas {
-    position: fixed;
-    top: 0;
-    left: 0;
-    z-index: 0;
+/* GALLERY */
+.gallery {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 10px;
 }
+
+.gallery img {
+  width: 150px;
+  height: 200px;
+  object-fit: cover;
+  border-radius: 10px;
+  transition: 0.3s;
+}
+
+.gallery img:hover {
+  transform: scale(1.1);
+}
+
+/* HEART ANIMATION */
+.heart {
+  position: fixed;
+  bottom: 0;
+  color: pink;
+  font-size: 20px;
+  animation: floatUp 5s linear infinite;
+}
+
+@keyframes floatUp {
+  0% { transform: translateY(0); opacity: 1; }
+  100% { transform: translateY(-800px); opacity: 0; }
+}
+
 </style>
 </head>
 
 <body>
 
-<!-- 🔒 LOCK SCREEN -->
+<!-- PASSWORD SCREEN -->
 <div id="lockScreen">
-    <h2>Enter Secret Code (What I call you!!🐧)</h2>
-    <input type="password" id="password" placeholder="Enter password">
-    <button onclick="checkPassword()">Unlock ❤️</button>
+  <h2>Enter Password 🔐</h2>
+  <input type="password" id="password">
+  <button onclick="checkPassword()">Enter</button>
 </div>
 
-<!-- 🎂 MAIN CONTENT -->
+<!-- MAIN CONTENT -->
 <div id="mainContent">
-    <h1>Happy Birthday Humari Pyari Pagluu si Penguinnnn 🐧❤️</h1>
-    <div id="typing"></div>
 
-    <img src="https://i.imgur.com/yourimage.jpg" alt="Her Photo">
+<h1>Happy Birthday Humari Pyari Pagluu si Penguinnn 🐧❤️</h1>
 
-    <audio autoplay loop>
-        <source src="https://www.bensound.com/bensound-music/bensound-romantic.mp3">
-    </audio>
-</div>
-
-<canvas id="fireworks"></canvas>
-
-<script>
-// 🔒 Password
-function checkPassword() {
-    const pass = document.getElementById("password").value;
-    if(pass === "penguin") {
-        document.getElementById("lockScreen").style.display = "none";
-        document.getElementById("mainContent").style.display = "block";
-        startTyping();
-        startFireworks();
-    } else {
-        alert("Wrong password...Huhh Pagluu Kahikii 😤");
-    }
-}
-
-// ✍️ Typing Effect
-const text = `O mere pagluuu si Penguinnn 🐧❤️✨
+<div class="message">
+O mere pagluuu si Penguinnn 🐧❤️✨
 
 Pata hain... kabhi kabhi life mein kuch log aise aate hain... bina kisi warning ke, aur dheere dheere woh tumhari everyday life ka sabse important part ban jaate hain 💫  
 You are exactly that for me 😌🥹✨
@@ -166,63 +177,96 @@ Stay happy, stay mine like this always 💫
 You’re not just important…  
 you’re something I never want to lose 😌🥹💖
 
-(Scroll up once again… this is all yours 🐧❤️)`;
+(Scroll up once again… this is all yours 🐧❤️)
+</div>
 
-let i = 0;
-function startTyping() {
-    function type() {
-        if(i < text.length) {
-            document.getElementById("typing").innerHTML += text.charAt(i);
-            i++;
-            setTimeout(type, 25);
-        }
-    }
-    type();
+<!-- SLIDESHOW -->
+<div class="slideshow">
+  <img id="slide" src="her1.jpg">
+</div>
+
+<h2>😂 Funny Moments</h2>
+<div class="gallery">
+<img src="herfun1.jpg">
+<img src="herfun2.jpg">
+<img src="herfun3.jpg">
+<img src="herfun4.jpg">
+<img src="herfun5.jpg">
+<img src="herfun6.jpg">
+<img src="herfun7.jpg">
+<img src="herfun8.jpg">
+<img src="herfun9.jpg">
+<img src="herfun10.jpg">
+</div>
+
+<h2>❤️ Our Moments</h2>
+<div class="gallery">
+<img src="us1.jpg">
+<img src="us2.jpg">
+<img src="us3.jpg">
+<img src="us4.jpg">
+<img src="us5.jpg">
+<img src="us6.jpg">
+<img src="us7.jpg">
+<img src="us8.jpg">
+<img src="us9.jpg">
+<img src="us10.jpg">
+<img src="us11.jpg">
+<img src="us12.jpg">
+</div>
+
+</div>
+
+<!-- MUSIC -->
+<audio autoplay loop>
+  <source src="birthday.mp3" type="audio/mpeg">
+</audio>
+
+<script>
+
+/* PASSWORD */
+function checkPassword() {
+  let pass = document.getElementById("password").value;
+  if(pass === "penguin") {   // 🔥 change password here
+    document.getElementById("lockScreen").style.display = "none";
+    document.getElementById("mainContent").style.display = "block";
+  } else {
+    alert("Wrong password 😤");
+  }
 }
 
-// 🎆 Fireworks
-function startFireworks() {
-    const canvas = document.getElementById("fireworks");
-    const ctx = canvas.getContext("2d");
-
-    canvas.width = window.innerWidth;
-    canvas.height = window.innerHeight;
-
-    let particles = [];
-
-    function createFirework() {
-        for(let i=0;i<100;i++){
-            particles.push({
-                x: canvas.width/2,
-                y: canvas.height/2,
-                dx: (Math.random()-0.5)*6,
-                dy: (Math.random()-0.5)*6,
-                life: 100
-            });
-        }
-    }
-
-    function animate() {
-        ctx.fillStyle = "rgba(0,0,0,0.2)";
-        ctx.fillRect(0,0,canvas.width,canvas.height);
-
-        particles.forEach((p,index)=>{
-            p.x += p.dx;
-            p.y += p.dy;
-            p.life--;
-
-            ctx.fillStyle = "white";
-            ctx.fillRect(p.x,p.y,2,2);
-
-            if(p.life<=0) particles.splice(index,1);
-        });
-
-        requestAnimationFrame(animate);
-    }
-
-    createFirework();
-    animate();
+/* SLIDESHOW */
+let images = [];
+for (let i = 1; i <= 71; i++) {
+  images.push("her" + i + ".jpg");
 }
+
+let index = 0;
+setInterval(() => {
+  document.getElementById("slide").src = images[index];
+  index = (index + 1) % images.length;
+}, 2000);
+
+/* BACKGROUND CHANGE */
+let bgImages = ["usbg1.jpg", "usbg2.jpg"];
+let bgIndex = 0;
+
+setInterval(() => {
+  document.body.style.backgroundImage = `url(${bgImages[bgIndex]})`;
+  bgIndex = (bgIndex + 1) % bgImages.length;
+}, 5000);
+
+/* HEARTS */
+setInterval(() => {
+  let heart = document.createElement("div");
+  heart.className = "heart";
+  heart.innerHTML = "❤️";
+  heart.style.left = Math.random() * 100 + "vw";
+  document.body.appendChild(heart);
+
+  setTimeout(() => heart.remove(), 5000);
+}, 500);
+
 </script>
 
 </body>
