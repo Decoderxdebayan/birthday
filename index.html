@@ -3,11 +3,11 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Happy Birthday My Penguin 🐧❤️</title>
+<title>Penguin ka Hempy wala Birthdayy 🐧❤️</title>
 
 <style>
 
-/* GENERAL */
+/* BODY */
 body {
   margin: 0;
   font-family: Arial, sans-serif;
@@ -16,7 +16,17 @@ body {
   overflow-y: auto;
   background-size: cover;
   background-position: center;
-  transition: 1s;
+  transition: background-image 1s ease-in-out;
+}
+
+/* DARK OVERLAY */
+body::before {
+  content: "";
+  position: fixed;
+  width: 100%;
+  height: 100%;
+  background: rgba(0,0,0,0.5);
+  z-index: -1;
 }
 
 /* PASSWORD SCREEN */
@@ -26,15 +36,12 @@ body {
   justify-content: center;
   align-items: center;
   flex-direction: column;
-  background: url('usbg1.jpg') center/cover no-repeat;
 }
 
 input {
   padding: 10px;
-  font-size: 18px;
   border-radius: 10px;
   border: none;
-  margin-top: 10px;
 }
 
 button {
@@ -43,35 +50,29 @@ button {
   border: none;
   border-radius: 10px;
   background: pink;
-  cursor: pointer;
 }
 
-/* MAIN CONTENT */
+/* MAIN */
 #mainContent {
   display: none;
   padding: 20px;
 }
 
-/* HEADING */
-h1 {
-  text-shadow: 0 0 10px pink, 0 0 20px red;
-}
-
 /* TEXT */
 .message {
-  max-width: 900px;
+  max-width: 800px;
   margin: auto;
-  line-height: 1.6;
+  line-height: 1.7;
   font-size: 18px;
+  white-space: pre-line;
 }
 
 /* SLIDESHOW */
 .slideshow img {
-  width: 300px;
-  height: 400px;
+  width: 280px;
+  height: 380px;
   object-fit: cover;
   border-radius: 20px;
-  box-shadow: 0 0 20px pink;
   margin-top: 20px;
 }
 
@@ -81,13 +82,14 @@ h1 {
   flex-wrap: wrap;
   justify-content: center;
   gap: 10px;
+  margin-top: 20px;
 }
 
 .gallery img {
-  width: 150px;
-  height: 200px;
+  width: 140px;
+  height: 180px;
   object-fit: cover;
-  border-radius: 10px;
+  border-radius: 12px;
   transition: 0.3s;
 }
 
@@ -95,18 +97,18 @@ h1 {
   transform: scale(1.1);
 }
 
-/* HEART ANIMATION */
+/* HEARTS */
 .heart {
   position: fixed;
   bottom: 0;
   color: pink;
   font-size: 20px;
-  animation: floatUp 5s linear infinite;
+  animation: float 5s linear infinite;
 }
 
-@keyframes floatUp {
-  0% { transform: translateY(0); opacity: 1; }
-  100% { transform: translateY(-800px); opacity: 0; }
+@keyframes float {
+  0% {transform: translateY(0); opacity:1;}
+  100% {transform: translateY(-800px); opacity:0;}
 }
 
 </style>
@@ -114,9 +116,9 @@ h1 {
 
 <body>
 
-<!-- PASSWORD SCREEN -->
+<!-- PASSWORD -->
 <div id="lockScreen">
-  <h2>Enter Password 🔐</h2>
+  <h2>Enter Secret Code (What I call You👀🐧) 🔐</h2>
   <input type="password" id="password">
   <button onclick="checkPassword()">Enter</button>
 </div>
@@ -124,7 +126,7 @@ h1 {
 <!-- MAIN CONTENT -->
 <div id="mainContent">
 
-<h1>Happy Birthday Humari Pyari Pagluu si Penguinnn 🐧❤️</h1>
+<h1>Happy Birthday Humari Pyari Penguinnn 🐧❤️</h1>
 
 <div class="message">
 O mere pagluuu si Penguinnn 🐧❤️✨
@@ -185,35 +187,14 @@ you’re something I never want to lose 😌🥹💖
   <img id="slide" src="her1.jpg">
 </div>
 
-<h2>😂 Funny Moments</h2>
-<div class="gallery">
-<img src="herfun1.jpg">
-<img src="herfun2.jpg">
-<img src="herfun3.jpg">
-<img src="herfun4.jpg">
-<img src="herfun5.jpg">
-<img src="herfun6.jpg">
-<img src="herfun7.jpg">
-<img src="herfun8.jpg">
-<img src="herfun9.jpg">
-<img src="herfun10.jpg">
-</div>
+<h2>Paglu Moments👀</h2>
+<div class="gallery" id="funGallery"></div>
 
-<h2>❤️ Our Moments</h2>
-<div class="gallery">
-<img src="us1.jpg">
-<img src="us2.jpg">
-<img src="us3.jpg">
-<img src="us4.jpg">
-<img src="us5.jpg">
-<img src="us6.jpg">
-<img src="us7.jpg">
-<img src="us8.jpg">
-<img src="us9.jpg">
-<img src="us10.jpg">
-<img src="us11.jpg">
-<img src="us12.jpg">
-</div>
+<h2>❤️ Bandar k sath Penguinn 👀</h2>
+<div class="gallery" id="usGallery"></div>
+
+<h2>💖 Hmmmmm Humari Penguin 👀😌</h2>
+<div class="gallery" id="herGallery"></div>
 
 </div>
 
@@ -225,47 +206,70 @@ you’re something I never want to lose 😌🥹💖
 <script>
 
 /* PASSWORD */
-function checkPassword() {
+function checkPassword(){
   let pass = document.getElementById("password").value;
-  if(pass === "penguin") {   // 🔥 change password here
-    document.getElementById("lockScreen").style.display = "none";
-    document.getElementById("mainContent").style.display = "block";
+  if(pass === "penguin"){
+    document.getElementById("lockScreen").style.display="none";
+    document.getElementById("mainContent").style.display="block";
   } else {
-    alert("Wrong password 😤");
+    alert("Wrong password....huhhh pagluu kahiki😤");
   }
 }
 
-/* SLIDESHOW */
-let images = [];
-for (let i = 1; i <= 71; i++) {
-  images.push("her" + i + ".jpg");
-}
-
-let index = 0;
-setInterval(() => {
-  document.getElementById("slide").src = images[index];
-  index = (index + 1) % images.length;
-}, 2000);
-
-/* BACKGROUND CHANGE */
-let bgImages = ["usbg1.jpg", "usbg2.jpg"];
+/* BACKGROUND FIX (NO WHITE ISSUE) */
+let bgImages = ["usbg1.jpg","usbg2.jpg"];
 let bgIndex = 0;
 
-setInterval(() => {
-  document.body.style.backgroundImage = `url(${bgImages[bgIndex]})`;
+function changeBG(){
+  document.body.style.backgroundImage = "url('" + bgImages[bgIndex] + "')";
   bgIndex = (bgIndex + 1) % bgImages.length;
-}, 5000);
+}
+
+changeBG();
+setInterval(changeBG, 5000);
+
+/* SLIDESHOW */
+let slideImages = [];
+for(let i=1;i<=71;i++){
+  slideImages.push("her"+i+".jpg");
+}
+
+let sIndex = 0;
+setInterval(()=>{
+  document.getElementById("slide").src = slideImages[sIndex];
+  sIndex = (sIndex+1)%slideImages.length;
+},2000);
+
+/* FUNNY */
+for(let i=1;i<=10;i++){
+  let img = document.createElement("img");
+  img.src = "herfun"+i+".jpg";
+  document.getElementById("funGallery").appendChild(img);
+}
+
+/* COUPLE */
+for(let i=1;i<=12;i++){
+  let img = document.createElement("img");
+  img.src = "us"+i+".jpg";
+  document.getElementById("usGallery").appendChild(img);
+}
+
+/* HER */
+for(let i=1;i<=71;i++){
+  let img = document.createElement("img");
+  img.src = "her"+i+".jpg";
+  document.getElementById("herGallery").appendChild(img);
+}
 
 /* HEARTS */
-setInterval(() => {
-  let heart = document.createElement("div");
-  heart.className = "heart";
-  heart.innerHTML = "❤️";
-  heart.style.left = Math.random() * 100 + "vw";
-  document.body.appendChild(heart);
-
-  setTimeout(() => heart.remove(), 5000);
-}, 500);
+setInterval(()=>{
+  let h=document.createElement("div");
+  h.className="heart";
+  h.innerHTML="❤️";
+  h.style.left=Math.random()*100+"vw";
+  document.body.appendChild(h);
+  setTimeout(()=>h.remove(),5000);
+},500);
 
 </script>
 
