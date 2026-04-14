@@ -58,7 +58,11 @@ h1 {
 #typing {
     font-size: 1.2em;
     margin: 20px;
-    min-height: 120px;
+    padding: 20px;
+    max-width: 800px;
+    margin-left: auto;
+    margin-right: auto;
+    line-height: 1.6;
 }
 
 img {
@@ -116,18 +120,56 @@ function checkPassword() {
 
 // ✍️ Typing Effect
 const text = `O mere pagluuu si Penguinnn 🐧❤️✨
-Pata hain...kabhi kabhi life mein kuch log aise aate hain... bina kisi warning ke, aur dheere dheere woh tumhari everyday life ka sabse important part ban jaate hain 💫 You are exactly that for me 😌🥹✨
-Pehle bas baatein hoti thi..phir aadat ban gayi...aur ab aisa lagta hai ki tere bina din complete hi nahi hota 😮‍💨 
-From being my first “Good Morning” ☀️ to my last “Good Night” 🌙...from your nonstop bak bak 😄 (which I secretly love the most) to the way you understand me without me even saying anything....you’ve become more than just a person—you’ve become a feeling ❤️ And Thankyyyy for that...I can't even express those feelings in words..😮‍💨
-Aur sabse special baat...jab mera mood off hota hai, tu bhi thik nahi hoti...aur jab tu upset hoti hai, mujhe bhi sab kuch ajeeb lagta hai, mera bhi mood accha nhi lagta 💔 That unspoken connection, that comfort....it’s rare, and it means everything to me. There’s a certain comfort in you.. a calmness I can’t explain. You don’t just listen, you understand. You don’t just stay, you make everything feel lighter 😌💞
-Tu mujhe apna bandar bolti hai 🐒😄 but honestly, I feel lucky ki main tera bandar hoon...because being yours, in any way, is something really special for me 😮‍💨💖
-Tu sirf cutieee aur pretty nahi hai 😌✨...you are someone who brings peace, happiness, and a warmth into my life that I never knew I needed 😬🌸
-Aaj tera special day hai 🎂🎉..toh full enjoy karna, ice cream bhi khana aur bahot maje karoo🍦😋 but haan, ekdum extra extra care lena, kiyuki humare paaas bas ek hii Penguinn hain 😮‍💨😌 aur thand nahi lagna chahiye ekdam nhii aur time pe pani piya karooo 😤 warna tabiyat kharab ho gaya na toh NO Kinder Joy ❌, NO chocolates ❌, NO momos ❌...bandar strict ho jayega bahottt 👀😤
-Tu sirf meri life ka ek hissa nahi hai... tu meri life ka woh part hai jiske bina sab kuch thoda sa adhura lagta hai 😌😮‍💨
-Bas tu aise hi rehna....meri paglu, meri penguin banke🐧❤️😬
 
-Happy Birthday, cutieee Aruuu 🎂💖 Stay happy, stay mine like this alwayssss 💫
-You’re not just important...you’re something I never want to lose 😌🥹💖`;
+Pata hain... kabhi kabhi life mein kuch log aise aate hain... bina kisi warning ke, aur dheere dheere woh tumhari everyday life ka sabse important part ban jaate hain 💫  
+You are exactly that for me 😌🥹✨
+
+Pehle bas baatein hoti thi… phir aadat ban gayi… aur ab aisa lagta hai ki tere bina din complete hi nahi hota 😮‍💨  
+
+From being my first “Good Morning” ☀️ to my last “Good Night” 🌙…  
+from your nonstop bak bak 😄 (which I secretly love the most)  
+to the way you understand me without me even saying anything…  
+
+you’ve become more than just a person—you’ve become a feeling ❤️  
+And thank you for that… I can't even express those feelings in words 😮‍💨  
+
+Aur sabse special baat…  
+jab mera mood off hota hai, tu bhi thik nahi hoti…  
+aur jab tu upset hoti hai, mujhe bhi sab kuch ajeeb lagta hai 💔  
+
+That unspoken connection… that comfort… it’s rare, and it means everything to me 😌💞  
+
+Tu mujhe apna bandar bolti hai 🐒😄  
+but honestly, I feel lucky ki main tera bandar hoon…  
+because being yours, in any way, is something really special for me 😮‍💨💖  
+
+Tu sirf cutieee aur pretty nahi hai 😌✨  
+you are someone who brings peace, happiness, and warmth into my life 🌸  
+
+Aaj tera special day hai 🎂🎉  
+toh full enjoy karna, ice cream bhi khana 🍦😋  
+but haan… extra care lena 😤  
+
+Kyunki humare paas bas ek hi Penguinn hai 🐧❤️  
+aur thand nahi lagna chahiye 😤  
+
+warna NO Kinder Joy ❌  
+NO chocolates ❌  
+NO momos ❌  
+bandar strict ho jayega 👀😤  
+
+Tu sirf meri life ka ek hissa nahi hai…  
+tu woh part hai jiske bina sab kuch adhura lagta hai 😌  
+
+Bas tu aise hi rehna… meri paglu, meri penguin 🐧❤️  
+
+Happy Birthday, cutieee Aruuu 🎂💖  
+Stay happy, stay mine like this always 💫  
+
+You’re not just important…  
+you’re something I never want to lose 😌🥹💖
+
+(Scroll up once again… this is all yours 🐧❤️)`;
 
 let i = 0;
 function startTyping() {
@@ -135,7 +177,7 @@ function startTyping() {
         if(i < text.length) {
             document.getElementById("typing").innerHTML += text.charAt(i);
             i++;
-            setTimeout(type, 40);
+            setTimeout(type, 25);
         }
     }
     type();
