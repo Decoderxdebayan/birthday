@@ -8,31 +8,40 @@
 <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;500;700&display=swap" rel="stylesheet">
 
 <style>
-
-/* BODY */
-body {
-  margin: 0;
-  font-family: 'Poppins', sans-serif;
-  text-align: center;
-  background-size: cover;
-  background-position: center;
-  background-repeat: no-repeat;
-  background-attachment: fixed;
-}
-
-/* DARK OVERLAY */
-body::before {
-  content: "";
+/* NEW BACKGROUND CONTAINER FIX */
+#bgContainer {
   position: fixed;
   top: 0;
   left: 0;
   width: 100%;
   height: 100%;
-  background: rgba(0,0,0,0.6);
-  z-index: -1;
+  z-index: -2;
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  transition: background-image 1s ease-in-out;
 }
 
-/* PASSWORD */
+/* DARK OVERLAY */
+#bgContainer::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0,0,0,0.6);
+}
+
+body {
+  margin: 0;
+  font-family: 'Poppins', sans-serif;
+  text-align: center;
+  color: white;
+  overflow-x: hidden;
+}
+
+/* PASSWORD SCREEN */
 #lockScreen {
   height: 100vh;
   display: flex;
@@ -44,6 +53,7 @@ body::before {
 #lockScreen h2 {
   color: #ffb6c1;
   text-shadow: 0 0 10px pink;
+  padding: 0 10px;
 }
 
 input {
@@ -66,13 +76,12 @@ button {
   cursor: pointer;
 }
 
-/* MAIN */
+/* MAIN CONTENT */
 #mainContent {
   display: none;
   padding: 20px;
 }
 
-/* HEADINGS */
 h1, h2 {
   color: #ffd1dc;
   text-shadow: 0 0 10px #ff69b4;
@@ -93,7 +102,6 @@ h1, h2 {
   z-index: 99999;
 }
 
-/* POPUP CONTENT */
 .popupContent {
   position: relative;
   background: #111;
@@ -104,7 +112,6 @@ h1, h2 {
   overflow-y: auto;
 }
 
-/* HEARTBEAT */
 .heartbeat {
   animation: heartbeat 1.5s infinite;
 }
@@ -113,11 +120,9 @@ h1, h2 {
   0% { transform: scale(1); }
   25% { transform: scale(1.02); }
   50% { transform: scale(1); }
-  75% { transform: scale(1.02); }
   100% { transform: scale(1); }
 }
 
-/* CLOSE BUTTON FIX */
 .closeBtn {
   position: absolute;
   top: 12px;
@@ -125,17 +130,8 @@ h1, h2 {
   font-size: 22px;
   color: #ff4d6d;
   cursor: pointer;
-  font-weight: bold;
-  text-shadow: 0 0 10px #ff4d6d;
-  transition: 0.2s ease;
 }
 
-.closeBtn:hover {
-  transform: scale(1.2);
-  color: white;
-}
-
-/* MESSAGE */
 .message {
   color: #ffd1dc;
   line-height: 1.8;
@@ -179,26 +175,22 @@ h1, h2 {
 }
 
 @keyframes float {
-  100% {transform: translateY(-800px); opacity:0;}
+  100% {transform: translateY(-100vh); opacity:0;}
 }
 
-/* MOBILE FIX */
+/* MOBILE */
 @media (max-width: 768px) {
-  body {
-    background-attachment: scroll !important; /* Fixes zoom on scroll */
-    background-size: 100% 100%; /* Keeps image aspect ratio like lock screen */
-  }
-
   .slideshow img {
     width: 90%;
     height: auto;
   }
 }
-
 </style>
 </head>
 
 <body>
+
+<div id="bgContainer"></div>
 
 <div id="lockScreen">
   <h2>Enter Secret Code 🔐 ( Hint: What I call You👀🐧)</h2>
@@ -231,7 +223,7 @@ from your nonstop bak bak 😄 (which I secretly love the most)
 to the way you understand me without me even saying anything…  
 
 you’ve become more than just a person—you’ve become a feeling ❤️  
-And thank you for that… I can't even express those feelings in words 😮&nbsp;  
+And thank you for that… I can't even express those feelings in words 😮‍💨  
 
 Aur sabse special baat…  
 jab mera mood off hota hai, tu bhi thik nahi hoti…  
@@ -288,12 +280,14 @@ you’re something I never want to lose 😌🥹💖
     <h2>💖 Hmmmmm Humari Cutiee Piee 👀😌</h2>
     <div class="gallery" id="herGallery"></div>
 
-  </div> </div> <audio id="bgMusic" loop>
+  </div>
+</div>
+
+<audio id="bgMusic" loop>
   <source src="birthday.mp3" type="audio/mpeg">
 </audio>
 
 <script>
-
 /* PASSWORD */
 function checkPassword(){
   let pass = document.getElementById("password").value;
@@ -301,36 +295,32 @@ function checkPassword(){
     document.getElementById("lockScreen").style.display="none";
     document.getElementById("mainContent").style.display="block";
     let music = document.getElementById("bgMusic");
-    if(music){
-      music.play().catch(()=>{});
-    }
+    if(music) music.play().catch(()=>{});
     setTimeout(()=>alert("Yayyy aaj to Penguinnn ka Birthday hainn!!🐧❤️🎂"),500);
   } else {
     alert("Wrong password....huhhh pagluu kahiki 😤");
   }
 }
 
-/* POPUP + BLUR + HEARTBEAT + TYPING */
+/* POPUP */
 function openMessage(){
   document.getElementById("messageBox").style.display = "flex";
-  document.getElementById("pageContent").classList.add("blur");
+  document.getElementById("pageContent").style.filter = "blur(5px)";
   document.getElementById("popupBox").classList.add("heartbeat");
   typeWriter();
 }
 
 function closeMessage(){
   document.getElementById("messageBox").style.display = "none";
-  document.getElementById("pageContent").classList.remove("blur");
+  document.getElementById("pageContent").style.filter = "none";
 }
 
-/* TYPING EFFECT */
+/* TYPING */
 function typeWriter(){
   let text = document.getElementById("originalMessage").innerText;
   let target = document.getElementById("typedMessage");
   target.innerHTML = "";
-
   let i = 0;
-
   function typing(){
     if(i < text.length){
       target.innerHTML += text.charAt(i);
@@ -338,21 +328,23 @@ function typeWriter(){
       setTimeout(typing, 15);
     }
   }
-
   typing();
 }
 
-/* BACKGROUND */
+/* BACKGROUND FIX - Updated to use bgContainer */
 let bg=["usbg1.jpg","usbg2.jpg"], bgIndex=0;
-setInterval(()=>{
-  document.body.style.backgroundImage="url('"+bg[bgIndex]+"')";
+let bgCont = document.getElementById("bgContainer");
+
+function changeBg() {
+  bgCont.style.backgroundImage="url('"+bg[bgIndex]+"')";
   bgIndex=(bgIndex+1)%2;
-},5000);
+}
+changeBg(); // Set initial background
+setInterval(changeBg, 5000);
 
 /* SLIDESHOW */
 let arr=[];
 for(let i=1;i<=71;i++) arr.push("her"+i+".jpg");
-
 let s=0;
 let slideImg = document.getElementById("slide");
 setInterval(()=>{
@@ -371,7 +363,6 @@ function createImg(x){
   i.onerror=()=>i.remove();
   return i;
 }
-
 for(let i=1;i<=10;i++) document.getElementById("funGallery").appendChild(createImg("herfun"+i+".jpg"));
 for(let i=1;i<=12;i++) document.getElementById("usGallery").appendChild(createImg("us"+i+".jpg"));
 for(let i=1;i<=71;i++) document.getElementById("herGallery").appendChild(createImg("her"+i+".jpg"));
@@ -387,7 +378,6 @@ setInterval(()=>{
   document.body.appendChild(h);
   setTimeout(()=>h.remove(),5000);
 },500);
-
 </script>
 
 </body>
